@@ -2,9 +2,9 @@ const fs = require("fs")
 const dialog = require("node-file-dialog")
 
 let badLines = [
-    /T[0-9]/,
-    /M6/,
-    /M0 /,
+    /T[0-9]\b/,
+    /M6\b/,
+    /M0\b/,
     /\(MSG, Change to Tool Dia.{0,10}\)/
 ]
 
@@ -21,8 +21,8 @@ dialog({ type: 'open-files' })
             let lines = nc_file_content.split("\n")
             let output_content = ""
 
-            //only check first 50 lines
-            for (let i = 0; i < 50; i++) {
+            //only check first 150 lines
+            for (let i = 0; i < 150; i++) {
                 let l = lines[i]
                 badLines.forEach(word => {
                     if (l && l.match(word)) {
